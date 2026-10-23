@@ -22,4 +22,14 @@ module PriceCalculations
     session[:cart_total] = calculate_total_sum(session[:cart].map { |item| item["item_price"] })
   end
 # ここまで
+
+
+# 追加
+  # ユーザのカート合計金額を再計算
+  def user_cart_calculation
+    cart = Cart.find_by(user_id: current_user.id)
+    @item_totals = cart.cart_items.map { |item| calculate_item_total(item.product.price, item.quantity) }
+    @cart_total = calculate_total_sum(@item_totals)
+  end
+# ここまで
 end

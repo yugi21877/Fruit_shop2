@@ -2,6 +2,8 @@ class CartsController < ApplicationController
 
   def show
     # sessionのカート作成後に処理を書きます
+    @cart = Cart.find_by(user_id: current_user.id) 
+    user_cart_calculation
   end
 
   def index

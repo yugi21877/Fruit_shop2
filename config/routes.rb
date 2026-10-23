@@ -47,4 +47,7 @@ Rails.application.routes.draw do
       post :update_quantity  # カート内の商品数を変更
     end
   end
+
+   resources :cart_items, only: [:create, :update, :destroy]  # 追加
+
 end
