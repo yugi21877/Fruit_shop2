@@ -23,8 +23,15 @@ class ProductsController < ApplicationController
   end
 
   # 商品一覧
+  # def index
+  #   @products = Product.all
+  # end
   def index
-    @products = Product.all
+    # Ransack の検索オブジェクトを生成して @q に代入
+    @q = Product.ransack(params[:q])
+    
+    # 検索結果を取得
+    @products = @q.result
   end
 
   # 商品詳細
@@ -62,7 +69,7 @@ class ProductsController < ApplicationController
     # ストロングパラメータで、フォームから送信されたデータを許可する
     def product_params
       params.require(:product).permit(:name, :description, :price, :photo, :status)
-    end
+    end 
     # 管理者確認メソッド
     def check_admin
       unless current_user.admin_flg

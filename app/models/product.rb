@@ -20,6 +20,16 @@ class Product < ApplicationRecord
   end
 
   # Enum（販売状況）
-  # enum status: { on_sale: 0, sold_out: 1 }
   enum :status, { on_sale: 0, sold_out: 1 }
+  
+  # 検索（Ransack）
+  def self.ransackable_attributes(auth_object = nil)
+    # %w[name price]
+    ["name", "price", "status", "created_at", "updated_at"]
+  end
+
+
+  def self.ransackable_associations(auth_object = nil)
+    ["cart_items", "carts", "order_details", "orders"]
+  end
 end
