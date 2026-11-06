@@ -24,12 +24,11 @@ class Product < ApplicationRecord
   
   # 検索（Ransack）
   def self.ransackable_attributes(auth_object = nil)
-    # %w[name price]
-    ["name", "price", "status", "created_at", "updated_at"]
+    ["name", "price", "created_at", "updated_at"]
   end
 
-
+  # 検索を許可する関連付け（アソシエーション）
   def self.ransackable_associations(auth_object = nil)
-    ["cart_items", "carts", "order_details", "orders"]
+    ["cart_items", "carts", "order_details", "orders", "photo_attachment", "photo_blob"]
   end
 end
